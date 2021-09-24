@@ -1,0 +1,10 @@
+{
+  "name": "DoveGo",
+  "version": "0.0.0",
+  "server": {
+    "port": 8080
+  },
+  "debug": {
+    "enable": true
+  }
+}
