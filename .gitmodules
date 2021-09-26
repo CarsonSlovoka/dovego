@@ -1,0 +1,3 @@
+[submodule "plugin/painter"]
+	path = src/plugin/painter
+	url = https://github.com/CarsonSlovoka/painter.git
