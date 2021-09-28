@@ -2,7 +2,10 @@
   "name": "DoveGo",
   "version": "0.0.0",
   "server": {
-    "port": 8080
+    "port": 8080,
+    "shutdown": {
+      "url": "/shutdown/"
+    }
   },
   "plugins": [
     {

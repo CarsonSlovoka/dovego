@@ -3,6 +3,7 @@ package urls
 import (
     "fmt"
     "github.com/CarsonSlovoka/dovego/app"
+    "github.com/CarsonSlovoka/dovego/app/config"
     "github.com/CarsonSlovoka/dovego/app/server"
     http2 "github.com/CarsonSlovoka/dovego/pkg/net/http"
     "net/http"
@@ -23,7 +24,7 @@ func initPlugin() {
     }
 }
 
-func setPluginURL(plugin app.Plugin) {
+func setPluginURL(plugin config.Plugin) {
     server.Mux.PathPrefix(fmt.Sprintf("/%s/", plugin.Name)).
         HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
             r.URL.Path = plugin.Path + strings.TrimPrefix(r.URL.Path, fmt.Sprintf("/%s/", plugin.Name))

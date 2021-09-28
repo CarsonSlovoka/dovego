@@ -3,6 +3,7 @@ package main
 import (
     "fmt"
     "github.com/CarsonSlovoka/dovego/app"
+    "github.com/CarsonSlovoka/dovego/app/config"
     "github.com/CarsonSlovoka/dovego/app/log"
     "github.com/CarsonSlovoka/dovego/app/server"
     "github.com/CarsonSlovoka/dovego/app/urls"
@@ -17,10 +18,10 @@ func main() {
             _ = file.Close()
         }()
     }
-    app.LoadConfig()
+    config.LoadConfig("manifest.json", &app.Config)
 
     quit := make(chan bool)
-    // log.Trace.Printf("%+v\n", app.Config)
+    log.Trace.Printf("%+v\n", app.Config)
     port := app.Config.Server.Port
     go func() {
         urls.InitURLs()
