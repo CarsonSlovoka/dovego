@@ -12,10 +12,11 @@ var (
 )
 
 type Settings struct {
-    Name    string `json:"name"`
-    Version string `json:"version"`
-    Server  Server `json:"server"`
-    Debug   Debug  `json:"debug"`
+    Name    string   `json:"name"`
+    Version string   `json:"version"`
+    Server  Server   `json:"server"`
+    Plugins []Plugin `json:"plugins"`
+    Debug   `json:"debug"`
 }
 
 type Debug struct {
@@ -24,6 +25,11 @@ type Debug struct {
 
 type Server struct {
     Port int `json:"port"`
+}
+
+type Plugin struct {
+    Name string `json:"name"`
+    Path string `json:"path"`
 }
 
 func LoadConfig() {

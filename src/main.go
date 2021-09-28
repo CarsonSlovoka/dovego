@@ -20,6 +20,7 @@ func main() {
     app.LoadConfig()
 
     quit := make(chan bool)
+    // log.Trace.Printf("%+v\n", app.Config)
     port := app.Config.Server.Port
     go func() {
         urls.InitURLs()

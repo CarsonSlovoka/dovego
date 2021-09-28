@@ -4,6 +4,16 @@
   "server": {
     "port": 8080
   },
+  "plugins": [
+    {
+      "name": "helloWorld",
+      "path": "/plugin/hello-world/"
+    },
+    {
+      "name": "painter",
+      "path": "/plugin/painter/src/"
+    }
+  ],
   "debug": {
     "enable": true
   }

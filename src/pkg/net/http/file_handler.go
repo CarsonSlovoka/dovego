@@ -56,6 +56,7 @@ func serveFile(w http.ResponseWriter, r *http.Request, fs http.FileSystem, filep
         if fileState.IsDir() {
             if url[len(url)-1] != '/' {
                 localRedirect(w, r, path.Base(url)+"/")
+                return
             }
         } else if url[len(url)-1] == '/' {
             localRedirect(w, r, "../"+path.Base(url))
