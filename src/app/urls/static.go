@@ -6,6 +6,7 @@ import (
 	"github.com/CarsonSlovoka/dovego/app"
 	"github.com/CarsonSlovoka/dovego/app/server"
 	http2 "github.com/CarsonSlovoka/dovego/pkg/net/http"
+	"github.com/CarsonSlovoka/dovego/pkg/utils"
 	"os"
 	"path/filepath"
 	"strings"
@@ -23,8 +24,10 @@ func initSystemStaticResource() {
 	server.Mux.PathPrefix("/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
 		startURL := app.Config.Server.StartURL
-		if r.URL.Path == "/" && startURL != "" {
 
+		urlPath := r.URL.Path
+		if urlPath == "/" && startURL != "" {
+			// log2.Trace.Println(filepath.Abs("./" + startURL))
 			if _, err := os.Stat(startURL); os.IsNotExist(err) || strings.ToLower(filepath.Ext(startURL)) != ".html" {
 				http2.ErrorWithHTML(w, err.Error(), http.StatusNotFound)
 				return
@@ -40,6 +43,12 @@ func initSystemStaticResource() {
 				}
 				_, _ = w.Write(bytes)
 			*/
+			return
+		}
+
+		// PWA Support: <link rel="manifest" href="/.webmanifest">
+		if utils.ContainsAny([]string{"/manifest.json", "/.webmanifest", "/sw.js"}, urlPath) {
+			http.ServeFile(w, r, "."+urlPath)
 			return
 		}
 

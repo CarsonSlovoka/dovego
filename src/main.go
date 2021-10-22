@@ -20,6 +20,11 @@ func init() {
 	if err := os.Chdir(workDir); err != nil {
 		log.Fatal(err)
 	}
+	workingDir, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println(fmt.Sprintf("Working Directory:%s", workingDir))
 }
 
 func main() {

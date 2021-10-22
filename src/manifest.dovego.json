@@ -6,7 +6,7 @@
     "shutdown": {
       "url": "/shutdown/"
     },
-    "start_url": "/app/urls/tmpl/index.html"
+    "start_url": ""
   },
   "plugins": [
     {
