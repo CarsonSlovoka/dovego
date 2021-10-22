@@ -18,7 +18,7 @@ func main() {
             _ = file.Close()
         }()
     }
-    config.LoadConfig("manifest.json", &app.Config)
+    config.LoadConfig("manifest.dovego.json", &app.Config)
 
     quit := make(chan bool)
     log.Trace.Printf("%+v\n", app.Config)
