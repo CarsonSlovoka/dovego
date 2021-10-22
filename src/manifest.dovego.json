@@ -5,7 +5,8 @@
     "port": 8080,
     "shutdown": {
       "url": "/shutdown/"
-    }
+    },
+    "start_url": "/app/urls/tmpl/index.html"
   },
   "plugins": [
     {
