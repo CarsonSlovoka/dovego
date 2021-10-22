@@ -3,5 +3,5 @@ package http
 var DebugMode bool
 
 func init() {
-    DebugMode = false
+	DebugMode = false
 }
