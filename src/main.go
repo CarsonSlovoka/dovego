@@ -1,32 +1,44 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/CarsonSlovoka/dovego/app"
 	"github.com/CarsonSlovoka/dovego/app/config"
-	"github.com/CarsonSlovoka/dovego/app/log"
+	log2 "github.com/CarsonSlovoka/dovego/app/log"
 	"github.com/CarsonSlovoka/dovego/app/server"
 	"github.com/CarsonSlovoka/dovego/app/urls"
+	log "log"
+	"os"
 	"os/exec"
 )
 
+func init() {
+	var workDir string
+	flag.StringVar(&workDir, "wDir", ".", "working directory")
+	flag.Parse()
+	if err := os.Chdir(workDir); err != nil {
+		log.Fatal(err)
+	}
+}
+
 func main() {
-	file := log.InitLog("dovego.temp.log")
+	file := log2.InitLog("dovego.temp.log")
 	if file != nil {
 		defer func() {
-			log.Trace.Printf("Exit App.")
+			log2.Trace.Printf("Exit App.")
 			_ = file.Close()
 		}()
 	}
 	config.LoadConfig("manifest.dovego.json", &app.Config)
 
 	quit := make(chan bool)
-	log.Trace.Printf("%+v\n", app.Config)
+	log2.Trace.Printf("%+v\n", app.Config)
 	port := app.Config.Server.Port
 	go func() {
 		urls.InitURLs()
 		if err := server.ListenAndServe(port); err != nil {
-			log.Trace.Println(err)
+			log2.Trace.Println(err)
 		}
 		quit <- true
 	}()
